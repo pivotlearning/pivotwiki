@@ -132,3 +132,4 @@ wfLoadSkin( 'Vector' );
 # Add more configuration options below.
 
 $wgAllowExternalImages = "true";
+$wgEnableUploads = true; #Enable uploads
