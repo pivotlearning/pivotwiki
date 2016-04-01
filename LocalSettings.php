@@ -29,7 +29,7 @@ $wgMetaNamespace = "Pivot_Learning_Wiki";
 $wgScriptPath = "";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = "http://pivotwiki-env.us-west-1.elasticbeanstalk.com";
+$wgServer = "http://pivotpedia.pivotlearning.org";
 
 
 ## The URL path to static resources (images, scripts, etc.)
