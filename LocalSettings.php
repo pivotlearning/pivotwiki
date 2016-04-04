@@ -133,3 +133,76 @@ wfLoadSkin( 'Vector' );
 
 $wgAllowExternalImages = "true";
 $wgEnableUploads = true; #Enable uploads
+
+#ckeditor settings
+
+#13.11.13->
+require_once( "$IP/extensions/WYSIWYG/WYSIWYG.php" );
+
+# Examples of setting permissions using $wgGroupPermissions, for more detailed explanation see:
+#   https://www.mediawiki.org/wiki/Manual:$wgGroupPermissions#Example
+# $wgGroupPermissions['user']['wysiwyg'] = true; //Only registered users are allowed to use wysiwyg
+# $wgGroupPermissions['*']['wysiwyg'] = true;    //Everyone is allowed to use wysiwyg
+$wgGroupPermissions['*']['wysiwyg'] = true;
+
+$wgDefaultUserOptions['cke_show'] = 'richeditor';    //Enable CKEditor
+$wgDefaultUserOptions['riched_use_toggle'] = false;  //Editor can toggle CKEditor/WikiText
+$wgDefaultUserOptions['riched_start_disabled'] = false; //Important!!! else bug...
+$wgDefaultUserOptions['riched_toggle_remember_state'] = true; //working/bug?
+$wgDefaultUserOptions['riched_use_popup'] = false;   //Deprecated
+
+##These are not compatible with WYSIWYG
+$wgFCKEditorExcludedNamespaces[] = NS_MEDIAWIKI;
+$wgFCKEditorExcludedNamespaces[] = NS_TEMPLATE;
+#13.11.13<-
+
+#17.01.14->
+#WikiEditor may not be compatible with WYSIWYG editor, use it with caution.
+require_once( "$IP/extensions/WikiEditor/WikiEditor.php" );
+
+# Enables/disables use of WikiEditor by default but still allow users to disable it in preferences
+$wgDefaultUserOptions['usebetatoolbar'] = 1;
+$wgDefaultUserOptions['usebetatoolbar-cgd'] = 1;
+
+# Displays the Preview and Changes tabs
+$wgDefaultUserOptions['wikieditor-preview'] = 0;
+
+# Displays the Publish and Cancel buttons on the top right side
+$wgDefaultUserOptions['wikieditor-publish'] = 0;
+#17.01.14<-
+
+#27.03.14->
+#This was required by SemanticMediaWiki extension in MW 1.22.4 to prevent startup error:
+$wgLocalisationUpdateDirectory = "$IP/cache";
+
+#These are for SemanticForms. Wysiwyg is not fully compatiple with SemanticForms and SemanticMediawiki,
+#so this is experimental feature.
+#enableSemantics( );
+#include_once( "$IP/extensions/SemanticForms/SemanticForms.php" );
+
+#Optional excludes of wysiwyg in case SemanticForms and SemanticMediawiki are installed:
+#$wgFCKEditorExcludedNamespaces[] = SF_NS_FORM;
+#$wgFCKEditorExcludedNamespaces[] = SMW_NS_PROPERTY;
+#27.03.14<-
+
+#06.02.15->
+#Setting value of following variables eq. to 1 will cause wikitext text blocks
+#within specified tags to be displayed as image- element in wysiwyg mode.
+#Value eq. to 0 makes texts inside these tags editable directly as text in wysiwyg mode
+#using pre- parent tag + child tag.
+$wgFCKEditorSpecialElementWithPreTag   = 0; // 1= <pre> tags with attributes only => img- element
+#06.02.15<-
+
+#26.02.15->
+$wgFCKEditorSpecialElementWithTextTags = 0; // 1= <nowiki>, <source> and <syntaxhighlight> tags => img- element
+#26.02.15<-
+
+#24.03.16-> 
+#Debug- mode of resource loader (use only for testing purposes):
+#$wgResourceLoaderDebug = true;
+
+#In case CKEDITOR is installed in some special place, define installation path 
+#with $wgCKEditor_BASEPATH. If variable is undefined, value will be 'extensions/WYSIWYG/ckeditor/'.
+#NOTE! Path must end with character '/' in linux (opsys. windows is untested).
+#$wgCKEditor_BASEPATH = 'extensions/WYSIWYG/ckeditor/';
+#24.03.16<-
